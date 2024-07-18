@@ -25,8 +25,9 @@ class _ForumPageState extends State<ForumPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(144, 205, 233, 0.973),
-      appBar: AppBar(title: Text("all eyes on me forum"),
-      backgroundColor: Color.fromRGBO(176, 214, 230, 0.498),
+      appBar: AppBar(
+        title: Text("All Eyes on Me Forum"),
+        backgroundColor: Color.fromRGBO(176, 214, 230, 0.498),
       ),
       body: Column(
         children: [
@@ -59,11 +60,16 @@ class _ForumPageState extends State<ForumPage> {
                 Expanded(
                   child: TextField(
                     controller: _postController,
-                    decoration: InputDecoration(labelText: "New Post"),
+                    decoration: InputDecoration(
+                      labelText: "New Post",
+                      border: OutlineInputBorder(),
+                    ),
                   ),
                 ),
+                SizedBox(width: 8.0),
                 IconButton(
                   icon: Icon(Icons.send),
+                  color: Theme.of(context).primaryColor,
                   onPressed: _addPost,
                 ),
               ],
@@ -88,12 +94,18 @@ class PostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      title: Text(content),
-      subtitle: Text(timestamp.toString()),
-      children: [
-        CommentsSection(postId: postId),
-      ],
+    return Card(
+      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: ExpansionTile(
+        title: Text(content),
+        subtitle: Text(
+          "${timestamp.day}/${timestamp.month}/${timestamp.year} ${timestamp.hour}:${timestamp.minute}",
+          style: TextStyle(fontSize: 12.0, color: Colors.grey[600]),
+        ),
+        children: [
+          CommentsSection(postId: postId),
+        ],
+      ),
     );
   }
 }
